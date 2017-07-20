@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_ripple"
+    android:paddingLeft="15dp"
+    android:paddingTop="10dp">
+
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/item_local_music_iv_album_pic"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/ic_music_placeholder" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/item_local_music_iv_album_pic"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_local_music_tv_music_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="16"
+            android:paddingTop="5dp"
+            android:text="绅士"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/item_local_music_tv_artist_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/item_local_music_tv_music_name"
+            android:layout_marginTop="5dp"
+            android:maxLength="16"
+            android:paddingBottom="5dp"
+            android:text="薛之谦-意外"
+            android:textColor="@color/divider"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/item_local_music_iv_add_to_next_play"
+        android:layout_width="45dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="@drawable/bg_ripple"
+        android:src="@mipmap/ic_add_to_next_play" />
+
+    <TextView
+        android:id="@+id/item_local_music_tv_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/item_local_music_iv_add_to_next_play"
+        android:text="3:08"
+        android:textColor="@color/divider"
+        android:textSize="16sp" />
+
+</RelativeLayout>

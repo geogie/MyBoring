@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyBoring</string>
+    <string name="splash_desc">george for graduation project</string>
+    <string name="author_info">copyright@susion</string>
+    <string name="transition_name_search_bar">transition_name_search_bar</string>
+    <string name="transition_name_tool_bar">transition_name_tool_bar</string>
+    <string name="transition_name_iv">drawer_scale_image_view</string>
+    <string name="author_nickname">george</string>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <com.georgeren.myboring.read.view.DrawScaleImageView
+        android:id="@+id/ac_picture_iv_draw_scale"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="70dp"
+        android:paddingTop="50dp"
+        android:transitionName="@string/transition_name_iv" />
+
+
+    <RelativeLayout
+        android:id="@+id/ac_picture_rl_picture_operator"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom"
+        android:background="@color/transparent">
+
+        <ImageView
+            android:id="@+id/ac_picture_iv_love"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="80dp"
+            android:paddingLeft="22.5dp"
+            android:paddingRight="22.5dp"
+            android:src="@mipmap/ic_un_love" />
+
+        <ImageView
+            android:id="@+id/ac_picture_iv_download"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="80dp"
+            android:paddingLeft="22.5dp"
+            android:paddingRight="22.5dp"
+            android:src="@mipmap/ic_picture_download" />
+
+    </RelativeLayout>
+
+</FrameLayout>

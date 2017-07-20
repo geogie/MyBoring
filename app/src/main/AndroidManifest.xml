@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.georgeren.myboring">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name=".base.SAppApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".base.ui.mainui.MainActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".base.ui.SplashActivity"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".base.ui.AuthorActivity" />
+        <activity android:name=".base.ui.CollectActivity" />
+        <activity android:name=".base.ui.AppInfoActivity" />
+        <activity android:name=".base.ui.SettingActivity" />
+        <activity android:name=".music.mvp.view.SearchMusicActivity" />
+        <activity android:name=".music.mvp.view.PlayMusicActivity" />
+        <activity android:name=".music.mvp.view.LocalMusicActivity" />
+        <activity android:name=".music.mvp.view.MyLikeActivity" />
+        <activity android:name=".music.mvp.view.PlayListActivity" />
+        <activity android:name=".AgentWebctivity" />
+
+        <service
+            android:name=".base.service.BaseService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="BASE_SERVICE" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".read.mvp.view.ZhiHuEssayActivity" />
+        <activity android:name=".read.mvp.view.PictureViewActivity"></activity>
+    </application>
+
+</manifest>
