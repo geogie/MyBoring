@@ -12,6 +12,7 @@ import java.util.List;
  * Created by georgeRen on 2017/7/13.
  *
  * model for request accept wang yi music API
+ *
  */
 
 public class Song extends FavoriteMark implements Serializable, PlayQueueSong{

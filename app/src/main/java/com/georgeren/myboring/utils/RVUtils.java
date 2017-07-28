@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +35,15 @@ public class RVUtils {
         return manager;
     }
 
+    /**
+     * 抽屉中的view控制
+     *
+     * @param context
+     * @param color 分割线颜色
+     * @param margin 分割线（view实体）大小、位置
+     * @param data 第二种item中的childitem（数据源+view）
+     * @return
+     */
     public static RecyclerView.ItemDecoration getDrawerItemDecorationDivider(Context context, int color, Rect margin, List<DividerMark> data) {
         return new DrawerDividerDecoration(context, color, margin, data);
     }
@@ -186,6 +197,9 @@ public class RVUtils {
         return staggeredGridLayoutManager;
     }
 
+    /**
+     * 抽屉中RecycleView 分割线 + 第二种item中childItem数据源
+     */
     private static class DrawerDividerDecoration extends RecyclerView.ItemDecoration {
         private List<DividerMark> mData;
         private Rect mMargin;
@@ -194,7 +208,7 @@ public class RVUtils {
 
         public DrawerDividerDecoration(Context context, int color, Rect margin, List<DividerMark> data) {
             mDividerPaint = new Paint();
-            mDividerPaint.setColor(context.getResources().getColor(color));
+            mDividerPaint.setColor(ContextCompat.getColor(context,color));
             mDividerHeight = 3;
             mData = data;
             mMargin = margin;

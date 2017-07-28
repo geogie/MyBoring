@@ -8,26 +8,41 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.WindowManager;
 
 import com.georgeren.myboring.base.ui.mainui.MainActivity;
 import com.georgeren.myboring.R;
+import com.georgeren.myboring.utils.PermissionUtils;
 import com.georgeren.myboring.utils.SystemOperationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SplashActivity extends Activity {
+    private static final String TAG = "SplashActivity";
     private static final int REQUEST_CODE_ASK_MULTIPLE_PERMISSIONS = 200;
     private boolean mHasSkip;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+
         requestPermission();
+//        requestPermission2();
     }
+
+    private void requestPermission2() {
+        if (PermissionUtils.getInstance().isSinglePermission(this, Manifest.permission.CAMERA, PermissionUtils.CAMERA_CODE)) {
+            Log.d(TAG,"有拍照权限");
+        }else {
+            Log.d(TAG,"没有有拍照权限");
+        }
+    }
+
 
     public void requestPermission() {
         String[] needPermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -61,11 +76,11 @@ public class SplashActivity extends Activity {
             skipToMainActivity();
         }
     }
+
     public void skipToMainActivity() {
         if (mHasSkip) {
             return;
         }
-        installShortcut();
         mHasSkip = true;
         getWindow().getDecorView().findViewById(android.R.id.content).postDelayed(new Runnable() {
             @Override
@@ -74,12 +89,5 @@ public class SplashActivity extends Activity {
                 SplashActivity.this.finish();
             }
         }, 3000);
-    }
-
-    private void installShortcut() {
-        String shortCutName = getString(R.string.app_name);
-        if (!SystemOperationUtils.hasShortcut(this, shortCutName)) {
-            SystemOperationUtils.createShortCut(this, shortCutName, R.mipmap.ic_logo);
-        }
     }
 }

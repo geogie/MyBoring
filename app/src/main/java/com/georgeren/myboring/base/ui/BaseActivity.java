@@ -66,26 +66,4 @@ public abstract class BaseActivity extends SwipeBackActivity {
         mSwipeBackLayout = getSwipeBackLayout();
         mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
     }
-
-    public void setEdgeTrackingEnabled(int size, int position) {
-        if (size == 0) {
-        }
-        // 只有一个fragment  - 左右滑关闭
-        else if (size == 1 && position == 0) {
-            mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_ALL);
-        }
-        // 多个fragment  - 位于左侧尽头 - 只可左滑关闭
-        else if (size != 1 && position == 0) {
-            mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_LEFT);
-        }
-        // 多个fragment  - 位于右侧尽头 - 只可右滑关闭
-        else if (size != 1 && position == size - 1) {
-            mSwipeBackLayout.setEdgeTrackingEnabled(SwipeBackLayout.EDGE_RIGHT);
-        }
-        // 多个fragment  - 位于中间 - 屏蔽所有左右滑关闭事件
-        else {
-            mSwipeBackLayout.setEdgeTrackingEnabled(0);
-        }
-    }
-
 }

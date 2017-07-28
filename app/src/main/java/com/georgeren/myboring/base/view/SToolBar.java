@@ -14,6 +14,7 @@ import com.georgeren.myboring.R;
 /**
  * Created by georgeRen on 2017/7/14.
  *  custom toolbar: 主要用于主页协调ViewPager, 和普通的ToolBar标题展示作用
+ *
  */
 
 public class SToolBar extends RelativeLayout implements View.OnClickListener {

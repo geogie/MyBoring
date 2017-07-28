@@ -74,4 +74,5 @@ public class APIHelper {
     public static PictureService getPictureService() {
         return getInstance().getService(PictureService.class);
     }
+
 }

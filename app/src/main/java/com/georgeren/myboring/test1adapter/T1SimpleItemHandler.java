@@ -1,22 +1,15 @@
-package com.georgeren.myboring.base.ui;
+package com.georgeren.myboring.test1adapter;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.georgeren.myboring.base.adapter.ViewHolder;
-
 /**
- * Created by georgeRen on 2017/7/14.
- *
- * 第二层封装item：上下文、数据源（范型）、mPosition（这个item的所在下标）、mAdapter
- *
- *
- * onBindDataView（自己的抽象）：让实例把数据绑定到view上
- *
+ * Created by georgeRen on 2017/7/24.
  */
 
-public abstract class SimpleItemHandler <T extends Object> implements ItemHandler<T>, View.OnClickListener {
+public abstract class T1SimpleItemHandler <T extends Object> implements T1ItemHandler<T>, View.OnClickListener {
+
     protected Context mContext;
 
     protected T mData;
@@ -24,7 +17,7 @@ public abstract class SimpleItemHandler <T extends Object> implements ItemHandle
     protected Object mAdapter;
     @Override
 
-    public void onCreateItemHandler(ViewHolder vh, ViewGroup parent) {
+    public void onCreateItemHandler(T1ViewHolder vh, ViewGroup parent) {
         if (mContext == null) {
             mContext = vh.getContext();
         }
@@ -38,13 +31,12 @@ public abstract class SimpleItemHandler <T extends Object> implements ItemHandle
      * @param position
      */
     @Override
-    final public void onBindView(Object adapter, ViewHolder vh, T data, int position) {
+    final public void onBindView(Object adapter, T1ViewHolder vh, T data, int position) {
         mData=data;
         mPosition=position;
         mAdapter = adapter;
         onBindDataView(vh, data, position);
     }
 
-    public abstract void onBindDataView(ViewHolder vh, T data, int position);
-
+    public abstract void onBindDataView(T1ViewHolder vh, T data, int position);
 }

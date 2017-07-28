@@ -37,6 +37,8 @@ import java.util.Set;
 
 /**
  * Created by georgeRen on 2017/7/13.
+ *
+ * music板块：
  */
 
 public class MusicPageFragment extends BaseFragment implements OnLastItemVisibleListener, MediaPlayerContract.BaseView {

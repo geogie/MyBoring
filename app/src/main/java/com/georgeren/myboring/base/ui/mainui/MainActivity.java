@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -24,6 +25,7 @@ import com.georgeren.myboring.music.MusicPageFragment;
 import com.georgeren.myboring.music.service.MusicServiceInstruction;
 import com.georgeren.myboring.read.ReadPageFragment;
 import com.georgeren.myboring.utils.RVUtils;
+import com.georgeren.myboring.utils.ToastUtils;
 import com.georgeren.myboring.utils.UIUtils;
 
 import java.util.ArrayList;
@@ -34,7 +36,6 @@ public class MainActivity extends BaseActivity {
     private LinearLayout mDrawerMenu;
     private RecyclerView mDrawerRv;
     private ViewPager mViewPager;
-
     private List<Fragment> mMainUIFragments = new ArrayList<>();
 
     public static void start(Context srcContext) {
@@ -82,7 +83,11 @@ public class MainActivity extends BaseActivity {
         mToolBar.setMainPage(true, mViewPager);   //必须要先设置adapter
         mToolBar.showCurrentSelectedFragment();
         mDrawerRv.setLayoutManager(RVUtils.getLayoutManager(this, LinearLayoutManager.VERTICAL));
-        mDrawerRv.addItemDecoration(RVUtils.getDrawerItemDecorationDivider(this, R.color.divider, new Rect(UIUtils.dp2Px(40), UIUtils.dp2Px(40), UIUtils.dp2Px(30), 0), DrawerData.getData()));
+        //  被第二种item的第一个childitem遮盖住了这条线，childitme的分割线也受这个控制childitem相互遮盖（childitem还受DividerMark控制是否显示）
+        mDrawerRv.addItemDecoration(RVUtils.getDrawerItemDecorationDivider(this,
+                R.color.divider,
+                new Rect(UIUtils.dp2Px(40), UIUtils.dp2Px(40), UIUtils.dp2Px(30), 0),
+                DrawerData.getData()));
     }
 
     @Override
@@ -106,5 +111,24 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
         Intent intent = new Intent(MusicServiceInstruction.SERVER_RECEIVER_SAVE_LAST_PLAY_MUSIC);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exit();
+            return false;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    private long exitTime = 0;
+
+    public void exit() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            ToastUtils.showLong("再按一次退出程序");
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+        }
     }
 }

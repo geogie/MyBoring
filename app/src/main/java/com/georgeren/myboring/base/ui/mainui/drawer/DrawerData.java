@@ -22,8 +22,12 @@ public class DrawerData {
     public static final String DRAWER_COLLECT = "我的收藏";
     public static final String DRAWER_APP_INFO = "应用信息";
     public static final String DRAWER_SETTING = "设置";
-    public static List<DividerMark> sData;
+    public static List<DividerMark> sData;// 抽屉中的第二中item的数据源（图片+文字+是否显示分割线）
 
+    /**
+     * 抽屉中的第二种item的childItem数据源+是否显示分割线
+     * @return
+     */
     public static List<DividerMark> getData() {
         if (sData == null) {
             sData = new ArrayList<>();
@@ -39,7 +43,6 @@ public class DrawerData {
     public static class DrawerItem extends DividerMark {
         public int imageRes;
         public String type;
-
 
         public DrawerItem(String item, int imageRes, boolean needDivider) {
             super(needDivider);

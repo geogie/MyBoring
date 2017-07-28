@@ -22,4 +22,6 @@
     <color name="divider">#c7c7c7</color>
     <color name="shadow_divider">#e4e4e4</color>
     <color name="gray_divider">#88c7c7c7</color>
+
+    <color name="black2">#ff000000</color>
 </resources>

@@ -10,7 +10,17 @@ import java.util.List;
 
 /**
  * Created by georgeRen on 2017/7/14.
- * Item: 2种
+ *
+ * 抽屉的RecyclerView的adapter：Item: 2种 DrawerHeaderItemHandler、DrawerItemHandler，必须实现：构造、2个方法
+ *
+ * 构造：上下文，数据源
+ *
+ * 初始化Item类型对应的实例initHandlers：DrawerHeaderItemHandler、DrawerItemHandler
+ * 调用了父类的registerItemHandler进行Item注册（类型--实例），采用工厂模式把item（实例）注册进去（采用顶层父类，多态）。
+ *
+ * getViewType：根据position获取对应item的类型
+ *
+ *
  */
 
 public class MainDrawerAdapter extends BaseRVAdapter {
@@ -50,7 +60,6 @@ public class MainDrawerAdapter extends BaseRVAdapter {
         if (o instanceof DrawerData.DrawerItem) {
             return ITEM_HANDLER_ITEM;
         }
-
         return -1;
     }
 }
