@@ -15,6 +15,7 @@ import rx.Subscriber;
  * Created by georgeRen on 2017/7/14.
  * 数据库操作的基类
  * 运用关系型数据库: lite-orm-1.9.2
+ * 用字段index：坑，会报错的欧。啊哈哈
  */
 
 public class DbBaseOperate <T> implements DataBaseOperateContract.BaseOperate<T> {
