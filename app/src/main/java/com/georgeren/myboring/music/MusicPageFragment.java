@@ -48,7 +48,7 @@ public class MusicPageFragment extends BaseFragment implements OnLastItemVisible
 
     private final int PLAY_LIST_PAGE_SIZE = 6;
     private List<Object> mData = new ArrayList<>();
-    private Set<String> uniqueData = new HashSet<>();
+    private HashSet<String> uniqueData = new HashSet<>();
     private int page = 0;
     private Song mSong;
     private MediaPlayerContract.ClientPlayControlCommand mClientControlCommand;
@@ -118,15 +118,16 @@ public class MusicPageFragment extends BaseFragment implements OnLastItemVisible
 
     private void loadMusicRecommendList() {
         mRV.setLoadStatus(LoadMoreView.LOADING);
-        APIHelper.subscribeSimpleRequest(APIHelper.getMusicServices().getPlayList(page * PLAY_LIST_PAGE_SIZE,
-                PLAY_LIST_PAGE_SIZE), new CommonObserver<GetPlayListResult>() {
-            @Override
+        APIHelper.subscribeSimpleRequest(APIHelper
+                .getMusicServices()
+                .getPlayList(page * PLAY_LIST_PAGE_SIZE, PLAY_LIST_PAGE_SIZE), new CommonObserver<GetPlayListResult>() {
+                        @Override
             public void onNext(GetPlayListResult playLists) {
                 mRV.setLoadStatus(LoadMoreView.NO_LOAD);
                 List<PlayList> playlists = playLists.getPlaylists();
 
                 for (PlayList playList : playlists) {  //discard repeat data
-                    if (uniqueData.add(playList.getId())) {
+                    if (uniqueData.add(playList.getId())) {// 去除重复的
                         mData.add(playList);
                     }
                 }

@@ -16,6 +16,7 @@ import java.lang.annotation.RetentionPolicy;
 
 /**
  * Created by georgeRen on 2017/7/14.
+ * 缺少下拉刷新。
  */
 
 public class LoadMoreRecycleView extends RecyclerView {

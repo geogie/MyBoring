@@ -32,7 +32,7 @@ public abstract class SimpleItemHandler <T extends Object> implements ItemHandle
     }
 
     /**
-     * 这里不建议有产生对象的操作(比如设置监听),把对象的生成放在 {@link #onCreateItemHandler(ViewHolder)} 方法里面吧.
+     * 这里不建议有产生对象的操作(比如设置监听),把对象的生成放在 {@link#onCreateItemHandler(ViewHolder)} 方法里面吧.
      * @param vh
      * @param data
      * @param position

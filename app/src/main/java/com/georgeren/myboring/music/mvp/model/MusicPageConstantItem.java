@@ -7,7 +7,6 @@ package com.georgeren.myboring.music.mvp.model;
 public class MusicPageConstantItem {
     public int iconId;
     public String item;
-    public String appendDesc;
     public int type;
 
     public MusicPageConstantItem(int iconId, String item, int type) {

@@ -12,6 +12,9 @@ import com.georgeren.myboring.base.ui.SimpleItemHandler;
 
 /**
  * Created by georgeRen on 2017/7/17.
+ *
+ *
+ *
  */
 
 public abstract class SimpleMusicIH <T> extends SimpleItemHandler<T> {

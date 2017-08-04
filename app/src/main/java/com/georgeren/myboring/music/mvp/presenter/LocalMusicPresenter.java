@@ -36,8 +36,10 @@ public class LocalMusicPresenter implements LocalMusicContract.Presenter, Loader
 
     private static final int URL_LOAD_LOCAL_MUSIC = 0;
     private static final Uri MEDIA_URI = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-    private static final String WHERE = MediaStore.Audio.Media.IS_MUSIC + "=1 AND "
-            + MediaStore.Audio.Media.SIZE + ">0";
+//    private static final String WHERE = MediaStore.Audio.Media.IS_MUSIC + "=1 AND "
+//            + MediaStore.Audio.Media.SIZE + ">0";  // 发现手机扫码的都是IS_MUSIC==0，看来有出入啊
+    private static final String WHERE = MediaStore.Audio.Media.DURATION + ">60000 AND "
+            + MediaStore.Audio.Media.SIZE + ">0";// 筛选大于1mine，文件大于0的
     private static final String ORDER_BY = MediaStore.Audio.Media.DISPLAY_NAME + " ASC";
     private static String[] PROJECTIONS = {
             MediaStore.Audio.Media.DATA, // the real path
