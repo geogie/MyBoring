@@ -33,7 +33,6 @@ import rx.schedulers.Schedulers;
 
 public class LocalMusicPresenter implements LocalMusicContract.Presenter, LoaderManager.LoaderCallbacks<Cursor> {
     private static final String TAG = "LocalMusicPresenter";
-
     private static final int URL_LOAD_LOCAL_MUSIC = 0;
     private static final Uri MEDIA_URI = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 //    private static final String WHERE = MediaStore.Audio.Media.IS_MUSIC + "=1 AND "
