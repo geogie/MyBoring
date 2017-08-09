@@ -1,6 +1,7 @@
 package com.georgeren.myboring.music;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ import java.util.Set;
  */
 
 public class MusicPageFragment extends BaseFragment implements OnLastItemVisibleListener, MediaPlayerContract.BaseView {
+    private static final String TAG = "MusicPageFragment";
     private SearchBar mSearchBar;
     private LoadMoreRecycleView mRV;
     private MusicControlPanel mControlView;
@@ -90,6 +92,7 @@ public class MusicPageFragment extends BaseFragment implements OnLastItemVisible
             @Override
             public void onPlayClick(boolean isPlay) {
                 if (isPlay) {
+                    Log.d(TAG,"播放音乐");
                     mClientControlCommand.play();
                 } else {
                     mClientControlCommand.pausePlay();

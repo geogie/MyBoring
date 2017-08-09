@@ -73,7 +73,6 @@ public class MusicPlayQueueWindow extends Dialog {
         dialogWindow.setAttributes(p);
         dialogWindow.setWindowAnimations(R.style.dialog_animation_frombottom);
 
-        initData();
         initRv();
     }
 
@@ -104,9 +103,7 @@ public class MusicPlayQueueWindow extends Dialog {
         });
     }
 
-    private void initData() {
 
-    }
 
     public void addMusicQueue(List<Song> songs) {
         mDialogData.addAll(songs);

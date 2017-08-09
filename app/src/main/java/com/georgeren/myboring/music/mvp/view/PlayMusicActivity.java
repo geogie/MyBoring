@@ -6,10 +6,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -41,6 +40,7 @@ import com.georgeren.myboring.utils.AlbumUtils;
 import com.georgeren.myboring.utils.TimeUtils;
 import com.georgeren.myboring.utils.ToastUtils;
 import com.georgeren.myboring.utils.TransitionHelper;
+import com.georgeren.myboring.utils.ULog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -51,6 +51,7 @@ import java.util.List;
 //音乐播放界面, MVP, 只控制UI的显示, 和UI交互事件的通知
 
 public class PlayMusicActivity  extends BaseActivity implements MediaPlayerContract.PlayView {
+    private static final String TAG = "PlayMusicActivity";
     private static final String TO_PLAY_MUSIC_INFO = "played_music";
     private static final String FROM_LITTLE_PANEL = "from_little_panel";
     private static final String NEED_LOAD = "needLoad";
@@ -161,6 +162,7 @@ public class PlayMusicActivity  extends BaseActivity implements MediaPlayerContr
             @Override
             public void onStartOrStartItemClick(boolean isPlay) {
                 if (isPlay) {
+                    Log.d(TAG,"播放音乐");
                     mPlayControlCommand.play();
                 } else {
                     mPlayControlCommand.pausePlay();
@@ -337,6 +339,7 @@ public class PlayMusicActivity  extends BaseActivity implements MediaPlayerContr
 
     @Override
     public void completionPlay() {
+        ULog.d(TAG,"onCompletion","播放结束");
         mPlayControlView.setIsPlay(false);
         mSeekBar.setCurrentProgress(mSeekBar.getMaxProgress());
     }

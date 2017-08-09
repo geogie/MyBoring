@@ -15,7 +15,7 @@ import com.georgeren.myboring.music.service.MusicServiceInstruction;
 /**
  * Created by georgeRen on 2017/7/18.
  *
- *  * Service Receiver
+ * Service Receiver
  * 接收客户端的Action,做出相应的反应
  */
 

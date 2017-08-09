@@ -35,7 +35,6 @@ public class MediaPlayerThumb {
         Canvas canvas = new Canvas(bitmap);
 
         Paint paint = new Paint();
-        RectF ovalRect1 = new RectF(0, 0, width, height);
         paint.setColor(mContext.getResources().getColor(R.color.transparent));
         paint.setStyle(Paint.Style.FILL);
 

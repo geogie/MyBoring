@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.georgeren.myboring.db.DbManager;
 import com.georgeren.myboring.db.operate.MusicDbOperator;
@@ -22,6 +23,7 @@ import com.georgeren.myboring.music.mvp.presenter.ServiceReceiverPresenter;
 import com.georgeren.myboring.music.service.MusicServiceInstruction;
 import com.georgeren.myboring.utils.SPUtils;
 import com.georgeren.myboring.utils.ToastUtils;
+import com.georgeren.myboring.utils.ULog;
 
 import java.io.Serializable;
 import java.util.List;
@@ -36,6 +38,7 @@ import java.util.List;
  */
 
 public class MusicPlayerService implements MediaPlayerContract.MediaPlayerRefreshView, MusicServiceContract.Service, BaseServiceContract {
+    private static final String TAG = "MusicPlayerService";
     private static final String PLAY_NOT_IS_PLAY_LIST = "PLAY_NOT_IS_PLAY_LIST";
     private MediaPlayerContract.PlayMusicControlPresenter mMusicPlayControlPresenter;
     private MusicDbOperator mDbOperator;
@@ -51,6 +54,7 @@ public class MusicPlayerService implements MediaPlayerContract.MediaPlayerRefres
     public MusicPlayerService(Service mServiceParent) {
         this.mServiceParent = mServiceParent;
     }
+
     @Override
     public void initService() {
         mQueueIsPrepare = false;
@@ -97,6 +101,7 @@ public class MusicPlayerService implements MediaPlayerContract.MediaPlayerRefres
     public void preparedPlay(int duration) {
         mPlayQueuePresenter.markCurrentPlayMusic(mSong);
         if (mAutoPlay) {
+            ULog.d(TAG, "preparedPlay", "准备音乐播放自动播放-音乐播放");
             mMusicPlayControlPresenter.startPlay();
         }
         Intent intent = new Intent(MusicServiceInstruction.CLIENT_RECEIVER_PLAYER_PREPARED);
@@ -110,6 +115,7 @@ public class MusicPlayerService implements MediaPlayerContract.MediaPlayerRefres
         mSong = mPlayQueuePresenter.getNextPlayMusic();
         changeMusic(mSong);
     }
+
     private boolean playQueueIsPrepare() {
         if (!mQueueIsPrepare) {
             ToastUtils.showShort("播放队列正在准备");
@@ -124,6 +130,7 @@ public class MusicPlayerService implements MediaPlayerContract.MediaPlayerRefres
         if (song != null) {
             mSong = song;
             try {
+                ULog.d(TAG, "loadMusicInfo", "初始化音乐");
                 mMusicPlayControlPresenter.initMediaPlayer(mSong.audio);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -137,6 +144,7 @@ public class MusicPlayerService implements MediaPlayerContract.MediaPlayerRefres
             mAutoPlay = true;
             return;
         }
+        ULog.d(TAG, "playMusic", "音乐播放");
         mMusicPlayControlPresenter.startPlay();
     }
 
@@ -149,6 +157,7 @@ public class MusicPlayerService implements MediaPlayerContract.MediaPlayerRefres
     public void seekTo(Intent intent) {
         mMusicPlayControlPresenter.seekTo(intent.getIntExtra(MusicServiceInstruction.SERVER_PARAM_SEEK_TO_POS, 0));
         if (!mMusicPlayControlPresenter.isPlaying() && mMusicPlayControlPresenter.isPrepared()) {
+            ULog.d(TAG, "seekTo", "音乐播放");
             mMusicPlayControlPresenter.startPlay();
         }
     }
@@ -225,6 +234,7 @@ public class MusicPlayerService implements MediaPlayerContract.MediaPlayerRefres
         }
         changeMusic(song);
     }
+
     private void notifyQueueNoMoreMusic() {
         Intent intent = new Intent(MusicServiceInstruction.CLIENT_RECEIVER_QUEUE_NO_MORE_MUSIC);
         LocalBroadcastManager.getInstance(mServiceParent).sendBroadcast(intent);
@@ -248,6 +258,7 @@ public class MusicPlayerService implements MediaPlayerContract.MediaPlayerRefres
                 @Override
                 public void onNext(Boolean flag) {
                     if (flag) {
+                        ULog.d(TAG, "changeMusic", "初始化音乐");
                         preparePlay();
                     }
                 }
@@ -259,17 +270,21 @@ public class MusicPlayerService implements MediaPlayerContract.MediaPlayerRefres
                     public void onNext(PlayListSong songs) {
                         if (songs != null && !songs.getData().isEmpty()) {
                             mSong.audio = songs.getData().get(0).getUrl();
+                            ULog.d(TAG, "changeMusic2", "初始化音乐");
                             preparePlay();
                         }
                     }
                 });
             }
+            ULog.d(TAG, "changeMusic", "初始化音乐3");
             preparePlay();
         }
     }
+
     private void preparePlay() {
         mAutoPlay = true;
         try {
+            ULog.d(TAG, "preparePlay", "初始化音乐");
             mMusicPlayControlPresenter.initMediaPlayer(mSong.audio);
         } catch (Exception e) {
             e.printStackTrace();

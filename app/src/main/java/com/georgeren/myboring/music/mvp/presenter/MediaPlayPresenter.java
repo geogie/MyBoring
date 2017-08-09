@@ -10,11 +10,13 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.georgeren.myboring.music.mvp.contract.MediaPlayerContract;
+import com.georgeren.myboring.utils.ULog;
 
 import java.io.IOException;
 
 /**
  * Created by georgeRen on 2017/7/18.
+ * 音乐播放封装
  */
 
 public class MediaPlayPresenter implements MediaPlayerContract.Presenter, MediaPlayer.OnPreparedListener,
@@ -62,6 +64,7 @@ public class MediaPlayPresenter implements MediaPlayerContract.Presenter, MediaP
         }
 
         if (mPlayer == null) {
+            ULog.d(TAG,"initMediaPlayer","mPlayer初始化、监听");
             mPlayer = new MediaPlayer();
             mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mPlayer.setOnPreparedListener(this);
@@ -74,6 +77,8 @@ public class MediaPlayPresenter implements MediaPlayerContract.Presenter, MediaP
         mPlayer.reset(); // reset for change music
 
         mSource = Uri.parse(mediaUri);
+        ULog.d(TAG,"initMediaPlayer","mPlayer设置播放资源");
+
         setSourceForMultiType();
         mIsPrepared = false;
         mPlayer.prepareAsync();
@@ -81,7 +86,8 @@ public class MediaPlayPresenter implements MediaPlayerContract.Presenter, MediaP
 
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
-        Log.e(TAG, "onPrepared()");
+        ULog.d(TAG,"onPrepared","已经准备好-准备音乐播放");
+
         mIsPrepared = true;
         mView.preparedPlay(mPlayer.getDuration());
     }
@@ -91,14 +97,12 @@ public class MediaPlayPresenter implements MediaPlayerContract.Presenter, MediaP
         if (!mIsPrepared) {
             return false;
         }
-
         if (mUpdateProgressHandler == null) {
             mUpdateProgressHandler = new Handler();
         }
-
+        ULog.d(TAG,"startPlay","音乐播放");
 
         mPlayer.start();
-
         mUpdateProgressHandler.post(mProgressUpdateRun);
         return true;
     }
@@ -143,7 +147,7 @@ public class MediaPlayPresenter implements MediaPlayerContract.Presenter, MediaP
 
     @Override
     public void onCompletion(MediaPlayer mediaPlayer) {
-        Log.e(TAG, "onCompletion()");
+        ULog.d(TAG,"onCompletion","播放结束");
         if (mUpdateProgressHandler != null)
             mUpdateProgressHandler.removeCallbacks(mProgressUpdateRun);
 

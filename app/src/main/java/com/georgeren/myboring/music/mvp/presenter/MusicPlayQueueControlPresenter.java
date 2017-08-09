@@ -86,15 +86,13 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
 
     @Override
     public Song getNextPlayMusic() {
-        if (mQueue.isEmpty() || mCurrentIndex + 1 >= mQueue.size()) {
-//            return mQueue.get(mCurrentIndex);
-            return null; // 侠客
+        if (mQueue.isEmpty() || mCurrentIndex >= mQueue.size()) {
+            return null;
         }
-
         if (mPlayMode == CIRCLE_MODE) {
         }
 
-        if (mPlayMode == QUEUE_MODE || mPlayMode == PLAY_LIST_CIRCLE_MODE) {
+        if (mPlayMode == QUEUE_MODE || mPlayMode == PLAY_LIST_CIRCLE_MODE) {// 队列，循环
             if (mCurrentIndex < mQueue.size() - 1) {
                 ++mCurrentIndex;
             } else {
@@ -102,7 +100,7 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
             }
         }
 
-        if (mPlayMode == RANDOM_MODE) {
+        if (mPlayMode == RANDOM_MODE) {// 随机
             mCurrentIndex = mRandom.nextInt(mQueue.size());
         }
 

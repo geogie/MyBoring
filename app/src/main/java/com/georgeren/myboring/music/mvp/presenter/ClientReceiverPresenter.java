@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 
 import com.georgeren.myboring.music.mvp.contract.MediaPlayerContract;
 import com.georgeren.myboring.music.mvp.model.Song;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 
 public class ClientReceiverPresenter implements MediaPlayerContract.ClientReceiverPresenter {
+    private static final String TAG = "ClientReceiverPresenter";
     protected ClientMusicReceiver mReceiver;
     protected MediaPlayerContract.BaseView mBaseView;
     protected MediaPlayerContract.PlayView mPlayView;
@@ -74,6 +76,7 @@ public class ClientReceiverPresenter implements MediaPlayerContract.ClientReceiv
             switch (action) {
                 case MusicServiceInstruction.CLIENT_RECEIVER_PLAYER_PREPARED:
                     if (mPlayView != null) {
+                        Log.d(TAG,"onReceive-接收器音乐播放-CLIENT_RECEIVER_PLAYER_PREPARED");
                         mPlayView.preparedPlay(intent.getIntExtra(MusicServiceInstruction.CLIENT_PARAM_PREPARED_TOTAL_DURATION, 0));
                     }
                     break;

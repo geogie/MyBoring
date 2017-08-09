@@ -14,7 +14,6 @@ import java.util.List;
 
 public class BaseService extends Service {
     List<BaseServiceContract> childServices;
-    public static final String SERVICE_ACTION = "BASE_SERVICE";
 
     @Override
     public void onCreate() {
