@@ -336,7 +336,7 @@ public class MusicPlayerService implements MediaPlayerContract.MediaPlayerRefres
                     if (flag) {
                         mHasLoadPlayListId = playList.getId();
                         mQueueIsPrepare = true;
-                        mPlayQueuePresenter.setPlayMode(MusicServiceContract.PlayQueueControlPresenter.PLAY_LIST_CIRCLE_MODE);
+                        mPlayQueuePresenter.setPlayMode(MusicServiceContract.PlayQueueControlPresenter.CIRCLE_MODE);
                         playNextMusic();
                     }
                 }

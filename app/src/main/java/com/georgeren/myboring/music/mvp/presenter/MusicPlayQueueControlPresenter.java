@@ -112,7 +112,7 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
         if (mQueue.isEmpty() || mCurrentIndex >= mQueue.size()) {
             return null;
         }
-        if (mPlayMode == QUEUE_MODE || mPlayMode == PLAY_LIST_CIRCLE_MODE) {// 队列，循环
+        if (mPlayMode == QUEUE_MODE) {// 队列，循环
             if (mCurrentIndex < mQueue.size() - 1) {
                 ++mCurrentIndex;
                 ULog.d(TAG, "getNextPlayMusic", "mCurrentIndex:" + mCurrentIndex);
@@ -137,7 +137,7 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
             return null; // 侠客
         }
 
-        if (mPlayMode == QUEUE_MODE || mPlayMode == PLAY_LIST_CIRCLE_MODE) {
+        if (mPlayMode == QUEUE_MODE) {
             if (mCurrentIndex > 0) {
                 mCurrentIndex--;
                 ULog.d(TAG, "getPrePlayMusic", "mCurrentIndex:" + mCurrentIndex);
