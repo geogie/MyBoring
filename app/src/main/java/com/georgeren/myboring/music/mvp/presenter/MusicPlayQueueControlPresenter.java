@@ -55,7 +55,7 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
     private boolean addMusicToQueue(int index, Song song) {
         if (!mUniqueIds.contains(song.id)) {
             mCurrentIndex = index;
-            ULog.d(TAG, "addMusicToQueue", "添加音乐到队列mCurrentIndex："+mCurrentIndex);
+            ULog.d(TAG, "addMusicToQueue", "添加音乐到队列mCurrentIndex：" + mCurrentIndex);
             mQueue.add(index, song);
             mUniqueIds.add(song.id);
             return true;
@@ -112,7 +112,7 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
         if (mQueue.isEmpty() || mCurrentIndex >= mQueue.size()) {
             return null;
         }
-        if (mPlayMode == QUEUE_MODE) {// 队列，循环
+        if (mPlayMode == QUEUE_MODE || mPlayMode == PLAY_LIST_CIRCLE_MODE) {// 队列，循环
             if (mCurrentIndex < mQueue.size() - 1) {
                 ++mCurrentIndex;
                 ULog.d(TAG, "getNextPlayMusic", "mCurrentIndex:" + mCurrentIndex);
@@ -137,7 +137,7 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
             return null; // 侠客
         }
 
-        if (mPlayMode == QUEUE_MODE) {
+        if (mPlayMode == QUEUE_MODE || mPlayMode == PLAY_LIST_CIRCLE_MODE) {
             if (mCurrentIndex > 0) {
                 mCurrentIndex--;
                 ULog.d(TAG, "getPrePlayMusic", "mCurrentIndex:" + mCurrentIndex);
@@ -198,12 +198,24 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
                             public void onNext(List<Song> songs) {
                                 ULog.d(TAG, "reLoadPlayQueue", "添加音乐到队列");
                                 mQueue.addAll(songs);
+                                addmUniqueIds(songs);
                                 subscriber.onNext(true);
                             }
                         });
             }
         });
+    }
 
+    /**
+     * 把播放队列也标记到唯一队列中，防止重复
+     * @param songs
+     */
+    private void addmUniqueIds(List<Song> songs){
+        for (int i = 0; i < songs.size(); i++) {
+            if (!mUniqueIds.contains(songs.get(i).id)){
+                mUniqueIds.add(songs.get(i).id);
+            }
+        }
     }
 
     @Override

@@ -68,6 +68,7 @@ public interface MusicServiceContract {
         int QUEUE_MODE = 0;
         int RANDOM_MODE = 1;
         int CIRCLE_MODE = 2;
+        int PLAY_LIST_CIRCLE_MODE = 3;
 
         boolean addToPlayQueue(Song song);
 
