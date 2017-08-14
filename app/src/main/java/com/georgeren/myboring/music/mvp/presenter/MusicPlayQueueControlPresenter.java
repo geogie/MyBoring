@@ -40,14 +40,14 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
 
         if (initQueue != null) {
             for (Song song : initQueue) {
-                ULog.d(TAG, "MusicPlayQueueControlPresenter", "添加音乐到队列");
+//                ULog.d(TAG, "MusicPlayQueueControlPresenter", "添加音乐到队列");
                 addMusicToQueue(0, song);
             }
         }
 
         mRandom = new Random();
         mCurrentIndex = 0;
-        ULog.d(TAG, "MusicPlayQueueControlPresenter", "mCurrentIndex:" + mCurrentIndex);
+//        ULog.d(TAG, "MusicPlayQueueControlPresenter", "mCurrentIndex:" + mCurrentIndex);
         mPlayMode = QUEUE_MODE;
         musicModeTranslate = new MusicModelTranslatePresenter();
     }
@@ -55,14 +55,14 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
     private boolean addMusicToQueue(int index, Song song) {
         if (!mUniqueIds.contains(song.id)) {
             mCurrentIndex = index;
-            ULog.d(TAG, "addMusicToQueue", "添加音乐到队列mCurrentIndex：" + mCurrentIndex);
+//            ULog.d(TAG, "addMusicToQueue", "添加音乐到队列mCurrentIndex：" + mCurrentIndex);
             mQueue.add(index, song);
             mUniqueIds.add(song.id);
             return true;
         } else {// 队列中已经存在了，但是开始播放这个旧音乐了，下标要改变啊
             changeCurrentIndex(song);
         }
-        ULog.d(TAG, "addMusicToQueue", "添加音乐到队列失败");
+//        ULog.d(TAG, "addMusicToQueue", "添加音乐到队列失败");
         return false;
     }
 
@@ -70,7 +70,7 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
         for (int i = 0; i < mQueue.size(); i++) {
             if (mQueue.get(i).id.contains(song.id)) {
                 mCurrentIndex = i;
-                ULog.d(TAG, "addMusicToQueue", "mCurrentIndex:" + mCurrentIndex);
+//                ULog.d(TAG, "addMusicToQueue", "mCurrentIndex:" + mCurrentIndex);
                 break;
             }
         }
@@ -78,7 +78,7 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
 
     @Override
     public boolean addToPlayQueue(Song song) {
-        ULog.d(TAG, "addToPlayQueue", "添加音乐到队列");
+//        ULog.d(TAG, "addToPlayQueue", "添加音乐到队列");
         return addMusicToQueue(0, song);
     }
 
@@ -115,16 +115,16 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
         if (mPlayMode == QUEUE_MODE || mPlayMode == PLAY_LIST_CIRCLE_MODE) {// 队列，循环
             if (mCurrentIndex < mQueue.size() - 1) {
                 ++mCurrentIndex;
-                ULog.d(TAG, "getNextPlayMusic", "mCurrentIndex:" + mCurrentIndex);
+//                ULog.d(TAG, "getNextPlayMusic", "mCurrentIndex:" + mCurrentIndex);
             } else {
                 mCurrentIndex = 0;
-                ULog.d(TAG, "getNextPlayMusic", "1mCurrentIndex:0");
+//                ULog.d(TAG, "getNextPlayMusic", "1mCurrentIndex:0");
             }
         }
 
         if (mPlayMode == RANDOM_MODE) {// 随机
             mCurrentIndex = mRandom.nextInt(mQueue.size());
-            ULog.d(TAG, "getNextPlayMusic", "2mCurrentIndex:" + mCurrentIndex);
+//            ULog.d(TAG, "getNextPlayMusic", "2mCurrentIndex:" + mCurrentIndex);
         }
 
         return mQueue.get(mCurrentIndex);
@@ -140,16 +140,16 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
         if (mPlayMode == QUEUE_MODE || mPlayMode == PLAY_LIST_CIRCLE_MODE) {
             if (mCurrentIndex > 0) {
                 mCurrentIndex--;
-                ULog.d(TAG, "getPrePlayMusic", "mCurrentIndex:" + mCurrentIndex);
+//                ULog.d(TAG, "getPrePlayMusic", "mCurrentIndex:" + mCurrentIndex);
             } else {
                 mCurrentIndex = mQueue.size() - 1;
-                ULog.d(TAG, "getPrePlayMusic", "1mCurrentIndex:" + mCurrentIndex);
+//                ULog.d(TAG, "getPrePlayMusic", "1mCurrentIndex:" + mCurrentIndex);
             }
         }
 
         if (mPlayMode == RANDOM_MODE) {
             mCurrentIndex = mRandom.nextInt(mQueue.size());
-            ULog.d(TAG, "getPrePlayMusic", "2mCurrentIndex:" + mCurrentIndex);
+//            ULog.d(TAG, "getPrePlayMusic", "2mCurrentIndex:" + mCurrentIndex);
         }
 
         return mQueue.get(mCurrentIndex);
@@ -196,7 +196,7 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
 
                             @Override
                             public void onNext(List<Song> songs) {
-                                ULog.d(TAG, "reLoadPlayQueue", "添加音乐到队列");
+//                                ULog.d(TAG, "reLoadPlayQueue", "添加音乐到队列");
                                 mQueue.addAll(songs);
                                 addmUniqueIds(songs);
                                 subscriber.onNext(true);
@@ -258,7 +258,7 @@ public class MusicPlayQueueControlPresenter implements MusicServiceContract.Play
 
         if (!haveSong) {
             markSong.isPlaying = true;
-            ULog.d(TAG, "markCurrentPlayMusic", "添加音乐到队列");
+//            ULog.d(TAG, "markCurrentPlayMusic", "添加音乐到队列");
             mQueue.add(0, markSong);
         }
     }

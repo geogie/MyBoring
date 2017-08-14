@@ -26,14 +26,17 @@ public class AlbumUtils {
         File file = new File(path);
         MediaMetadataRetriever metadataRetriever = new MediaMetadataRetriever();
         try {
+            ULog.d(TAG, "parseAlbum", "path:" + file.getAbsolutePath());
             metadataRetriever.setDataSource(file.getAbsolutePath());
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "parseAlbum: ", e);
         }
         byte[] albumData = metadataRetriever.getEmbeddedPicture();
         if (albumData != null) {
+            ULog.d(TAG, "parseAlbum", "albumData!=null");
             return BitmapFactory.decodeByteArray(albumData, 0, albumData.length);
         }
+        ULog.d(TAG, "parseAlbum", "albumData=null");
         return null;
     }
 
@@ -42,6 +45,7 @@ public class AlbumUtils {
             @Override
             public void call(Subscriber<? super Bitmap> subscriber) {
                 Bitmap bitmap = AlbumUtils.pressPicture(view, AlbumUtils.parseAlbumFromFile(new File(path)));
+                ULog.d(TAG, "setAlbum-call", "bitmapIsNull:" + (bitmap == null));
                 subscriber.onNext(bitmap);
             }
         })
@@ -61,11 +65,13 @@ public class AlbumUtils {
                     @Override
                     public void onNext(Bitmap bitmap) {
                         if (bitmap != null) {
+                            ULog.d(TAG, "setAlbum-onNext", "bitmap ok");
                             view.setImageBitmap(bitmap);
                         }
                     }
                 });
     }
+
     public static Bitmap pressPicture(ImageView view, byte[] bitmaps) {
         if (bitmaps != null) {
             BitmapFactory.Options options = new BitmapFactory.Options();
@@ -96,6 +102,7 @@ public class AlbumUtils {
     public static byte[] parseAlbumFromFile(File file) {
         MediaMetadataRetriever metadataRetriever = new MediaMetadataRetriever();
         try {
+            ULog.d(TAG, "parseAlbumFromFile", "path:" + file.getAbsolutePath());
             metadataRetriever.setDataSource(file.getAbsolutePath());
         } catch (IllegalArgumentException e) {
             Log.e(TAG, "parseAlbum: ", e);

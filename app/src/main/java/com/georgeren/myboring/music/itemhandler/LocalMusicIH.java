@@ -12,6 +12,7 @@ import com.georgeren.myboring.utils.AlbumUtils;
 import com.georgeren.myboring.utils.TimeUtils;
 import com.georgeren.myboring.utils.ToastUtils;
 import com.georgeren.myboring.utils.UIUtils;
+import com.georgeren.myboring.utils.ULog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -20,7 +21,7 @@ import org.greenrobot.eventbus.EventBus;
  */
 
 public class LocalMusicIH extends SimpleMusicIH<SimpleSong> {
-
+    private static final String TAG = "LocalMusicIH";
 
     public LocalMusicIH(boolean showNextPlay) {
         super(showNextPlay);
@@ -53,12 +54,14 @@ public class LocalMusicIH extends SimpleMusicIH<SimpleSong> {
         }
 
         mTvSecondTile.setText(desc);
-
+        mSdvAlbum.setImageBitmap(null);// 解决没有bitmap的被有bitmap覆盖问题
         if (data.isHasDown()) {
+            ULog.d(TAG, "bindData", "has position:" + position + " path:" + data.getPath());
             AlbumUtils.setAlbum(mSdvAlbum, data.getPath());
             String duration = TimeUtils.formatDuration(data.getDuration());
             mTvDuration.setText(duration.equals("00:00") ? "" : duration);
         } else {
+            ULog.d(TAG, "bindData", "hasNo position:" + position + " path:" + data.getPicPath());
             UIUtils.loadSmallPicture(mSdvAlbum, data.getPicPath());
             mTvDuration.setVisibility(View.GONE);
         }

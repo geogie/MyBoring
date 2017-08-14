@@ -30,6 +30,7 @@ import com.georgeren.myboring.music.mvp.view.MusicControlPanel;
 import com.georgeren.myboring.music.service.action.ClientPlayControlCommand;
 import com.georgeren.myboring.utils.RVUtils;
 import com.georgeren.myboring.utils.SPUtils;
+import com.georgeren.myboring.utils.ULog;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -40,6 +41,7 @@ import java.util.Set;
  * Created by georgeRen on 2017/7/13.
  *
  * music板块：
+ * 存在问题：我的喜欢item中的个数不是实时的。
  */
 
 public class MusicPageFragment extends BaseFragment implements OnLastItemVisibleListener, MediaPlayerContract.BaseView {
@@ -92,7 +94,6 @@ public class MusicPageFragment extends BaseFragment implements OnLastItemVisible
             @Override
             public void onPlayClick(boolean isPlay) {
                 if (isPlay) {
-                    Log.d(TAG,"播放音乐");
                     mClientControlCommand.play();
                 } else {
                     mClientControlCommand.pausePlay();
@@ -147,11 +148,13 @@ public class MusicPageFragment extends BaseFragment implements OnLastItemVisible
             @Override
             public void onNext(SimpleSong song) {
                 if (song != null) {
+//                    ULog.d(TAG,"loadPLayHistory-onNext","显示");
                     mControlView.setVisibility(View.VISIBLE);
                     mSong = song.translateToSong();
                     mControlView.setMusic(mSong);
                     mControlView.setPlay(false);
                 } else {
+//                    ULog.d(TAG,"loadPLayHistory-onNext","隐藏");
                     mControlView.setVisibility(View.GONE);
                 }
             }
@@ -171,6 +174,7 @@ public class MusicPageFragment extends BaseFragment implements OnLastItemVisible
 
     @Override
     public void refreshSong(Song song, boolean playStatus) {
+//        ULog.d(TAG,"refreshSong","显示");
         mControlView.setVisibility(View.VISIBLE);
         mSong = song;
         mControlView.setMusic(song);
