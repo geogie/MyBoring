@@ -71,7 +71,7 @@ public class ZhiHuEssayActivity extends BaseActivity implements ZhiHuEssayContra
         mEssay.id = getIntent().getStringExtra(ESSAY_ID);
         Date date = (Date) getIntent().getSerializableExtra(ESSAY_DATE);
         DbBaseOperate<NewsDetail> dbOperator = new DbBaseOperate<>(DbManager.getLiteOrm(), this, NewsDetail.class);
-        mPresenter = new ZhiHuEssayPresenter(this, date, dbOperator);
+        mPresenter = new ZhiHuEssayPresenter(this, date, mEssay.id, dbOperator);
     }
 
     @Override

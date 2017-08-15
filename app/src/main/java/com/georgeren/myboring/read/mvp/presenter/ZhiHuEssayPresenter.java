@@ -37,12 +37,12 @@ public class ZhiHuEssayPresenter implements ZhiHuEssayContract.Presenter {
     private boolean mIsLove;
     DbBaseOperate<NewsDetail> mDbOperator;
 
-    public ZhiHuEssayPresenter(ZhiHuEssayContract.View mView, Date date, DbBaseOperate<NewsDetail> dbOperator) {
+    public ZhiHuEssayPresenter(ZhiHuEssayContract.View mView, Date date, String currentId, DbBaseOperate<NewsDetail> dbOperator) {
         this.mView = mView;
         mEssayQueue = new ZhiHuEssayQueuePresenter();
         mCurrentDate = date;
         mDbOperator = dbOperator;
-        requestIdsForDate();
+        requestIdsForDate(currentId);
     }
 
     @Override
@@ -100,27 +100,37 @@ public class ZhiHuEssayPresenter implements ZhiHuEssayContract.Presenter {
     }
 
 
-    private void requestIdsForDate() {
+    private void requestIdsForDate(String currentId) {
         String date = TimeUtils.formatDate(mCurrentDate, "yyyyMMdd");
-        getDailyNews(date);
+        getDailyNews(date, currentId);
     }
 
-    private void getDailyNews(String date) {
+    private void getDailyNews(String date, final String currentId) {
         APIHelper.subscribeSimpleRequest(APIHelper.getZhiHuService().getFixDateNews(date), new CommonObserver<DailyNews>() {
             @Override
             public void onNext(DailyNews dailyNews) {
                 if (dailyNews == null) {
                     return;
                 }
-                initEssayQueue(dailyNews);
+                initEssayQueue(dailyNews, currentId);
             }
         });
     }
 
-    private void initEssayQueue(DailyNews dailyNews) {
+    private void initEssayQueue(DailyNews dailyNews, String currentId) {
         List<String> ids = new ArrayList<>();
         for (NewsDetail bean : dailyNews.getStories()) {
+            if (currentId != null && currentId.equals(bean.getId())) {
+                currentId = null;
+            }
             ids.add(bean.getId());
+        }
+        if (currentId != null) {
+            List<String> idsTem = new ArrayList<>();
+            idsTem.add(currentId);
+            idsTem.addAll(ids);
+            ids.clear();
+            ids.addAll(idsTem);
         }
         mEssayQueue.loadEssayQueue(ids);
     }

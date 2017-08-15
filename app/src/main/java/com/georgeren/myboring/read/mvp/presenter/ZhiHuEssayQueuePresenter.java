@@ -15,10 +15,9 @@ public class ZhiHuEssayQueuePresenter implements ZhiHuEssayContract.EssayQueue {
 
 
     public String getPreEssayId() {
-        if (mEssayIds == null || mEssayIds.isEmpty()) {
+        if (mEssayIds == null || mEssayIds.isEmpty() || mCurrentIndex == 0) {
             return null;
         }
-
         mCurrentIndex--;
         if (mCurrentIndex >= 0 && mCurrentIndex < mEssayIds.size()) {
             return mEssayIds.get(mCurrentIndex);
@@ -27,7 +26,7 @@ public class ZhiHuEssayQueuePresenter implements ZhiHuEssayContract.EssayQueue {
     }
 
     public String getNextEssayId() {
-        if (mEssayIds == null || mEssayIds.isEmpty()) {
+        if (mEssayIds == null || mEssayIds.isEmpty() || mCurrentIndex == mEssayIds.size() - 1) {
             return null;
         }
         mCurrentIndex++;
