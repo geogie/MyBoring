@@ -16,9 +16,11 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!--主页-->
         <activity
             android:name=".base.ui.mainui.MainActivity"
             android:theme="@style/AppTheme" />
+        <!--闪屏-->
         <activity
             android:name=".base.ui.SplashActivity"
             android:theme="@style/AppTheme">
@@ -28,15 +30,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".base.ui.AuthorActivity" />
-        <activity android:name=".base.ui.CollectActivity" />
-        <activity android:name=".base.ui.AppInfoActivity" />
-        <activity android:name=".base.ui.SettingActivity" />
-        <activity android:name=".music.mvp.view.SearchMusicActivity" />
-        <activity android:name=".music.mvp.view.PlayMusicActivity" />
-        <activity android:name=".music.mvp.view.LocalMusicActivity" />
-        <activity android:name=".music.mvp.view.MyLikeActivity" />
-        <activity android:name=".music.mvp.view.PlayListActivity" />
+        <!--作者-->
+        <activity android:name=".base.ui.AuthorActivity"
+            android:theme="@style/AppTheme"/>
+        <!--收藏-->
+        <activity android:name=".base.ui.CollectActivity"
+            android:theme="@style/AppTheme"/>
+        <!--app信息-->
+        <activity android:name=".base.ui.AppInfoActivity"
+            android:theme="@style/AppTheme" />
+        <!--设置-->
+        <activity android:name=".base.ui.SettingActivity"
+            android:theme="@style/AppTheme"/>
+        <!--搜音乐-->
+        <activity android:name=".music.mvp.view.SearchMusicActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".music.mvp.view.PlayMusicActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".music.mvp.view.LocalMusicActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".music.mvp.view.MyLikeActivity"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".music.mvp.view.PlayListActivity"
+            android:theme="@style/AppTheme"/>
         <service
             android:name=".base.service.BaseService"
             android:enabled="true"
@@ -46,8 +63,11 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".read.mvp.view.ZhiHuEssayActivity" />
-        <activity android:name=".read.mvp.view.PictureViewActivity" />
+        <activity android:name=".read.mvp.view.ZhiHuEssayActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme"/>
+        <activity android:name=".read.mvp.view.PictureViewActivity"
+            android:theme="@style/TranslucentTheme"/>
         <!--测试：adapter的封装-->
         <activity android:name=".test1adapter.Test1Activity">
         </activity>
